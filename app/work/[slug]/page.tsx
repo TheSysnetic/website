@@ -5,8 +5,7 @@ import { absoluteUrl, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import SceneController from "@/components/layout/SceneController";
 import PageHero from "@/components/ui/PageHero";
 import JsonLd from "@/components/ui/JsonLd";
-import BrowserFrame from "@/components/ui/BrowserFrame";
-import ProjectVisual from "@/components/ui/ProjectVisual";
+import LogoPlate from "@/components/ui/LogoPlate";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -21,7 +20,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${p.name} — Case Study`,
     description: `${p.tagline} ${p.services.join(", ")} by Sysnetic.`,
     path: `/work/${p.slug}/`,
-    image: p.screens[0],
   });
 }
 
@@ -32,7 +30,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const p = projects[idx];
   const next = projects[(idx + 1) % projects.length];
   const host = p.website.replace(/^https?:\/\//, "");
-  const bareHost = host.replace(/^www\./, "");
 
   return (
     <>
@@ -50,7 +47,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             headline: p.tagline,
             description: p.overview,
             url: absoluteUrl(`/work/${p.slug}/`),
-            image: absoluteUrl(p.screens[0]),
+            image: absoluteUrl(p.logo),
             creator: { "@type": "Organization", name: site.name, url: site.url },
             about: { "@type": "Organization", name: p.client, url: p.website },
           },
@@ -90,17 +87,17 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </dl>
       </PageHero>
 
-      <section aria-label="Project preview" className="relative">
+      <section aria-label="Client" className="relative">
         <div className="container-x">
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.08] bg-[#090c18] px-4 pt-10 md:px-16 md:pt-20" data-reveal>
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0"
-              style={{ background: `radial-gradient(60% 70% at 50% 100%, ${p.accent}33, transparent 70%)` }}
-            />
-            <div data-parallax="0.12" className="relative mx-auto max-w-5xl translate-y-6">
-              <BrowserFrame src={p.screens[0]} alt={`${p.name} — home page`} url={bareHost} sizes="(min-width: 1280px) 1024px, 92vw" priority />
-            </div>
+          <div
+            className="relative overflow-hidden rounded-[2rem] border border-white/10 p-4 md:p-8"
+            style={{
+              background: `radial-gradient(120% 80% at 100% 0%, ${p.accent}59 0%, transparent 55%), radial-gradient(90% 60% at 0% 100%, ${p.accent}26 0%, transparent 60%), rgb(14 16 28 / 0.78)`,
+            }}
+            data-reveal
+          >
+            <div className="h-1 w-24 rounded-full" style={{ background: p.accent }} />
+            <LogoPlate project={p} className="mt-6 aspect-[16/9] rounded-[1.5rem] md:aspect-[21/8]" sizes="(min-width: 1024px) 700px, 80vw" priority />
           </div>
         </div>
       </section>
@@ -148,16 +145,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      <section aria-label="More screens" className="relative pb-24 md:pb-36">
-        <div className="container-x grid gap-6 md:grid-cols-2 md:gap-8">
-          {p.screens.slice(1).map((src, i) => (
-            <div key={src} className={i === 1 ? "md:mt-24" : ""} data-reveal>
-              <BrowserFrame src={src} alt={`${p.name} — page design ${i + 2}`} url={bareHost} sizes="(min-width: 768px) 45vw, 92vw" />
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section aria-label="Next project" className="relative border-t border-line">
         <Link href={`/work/${next.slug}/`} data-cursor="Next" className="group container-x grid items-center gap-10 py-20 md:grid-cols-2 md:py-28">
           <div>
@@ -165,8 +152,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <p className="display mt-6 text-[clamp(2.5rem,6vw,5.5rem)] transition-colors duration-500 group-hover:text-accent">{next.name}</p>
             <p className="mt-4 max-w-md text-muted">{next.tagline}</p>
           </div>
-          <div className="transition-transform duration-[1.2s] ease-out-expo group-hover:-translate-y-2">
-            <ProjectVisual project={next} sizes="(min-width: 768px) 40vw, 90vw" />
+          <div
+            className="rounded-3xl border border-white/10 p-4 transition-transform duration-[1.2s] ease-out-expo group-hover:-translate-y-2"
+            style={{ background: `radial-gradient(120% 80% at 100% 0%, ${next.accent}59 0%, transparent 55%), rgb(14 16 28 / 0.78)` }}
+          >
+            <LogoPlate project={next} className="aspect-[16/9] rounded-2xl" sizes="(min-width: 768px) 40vw, 90vw" />
           </div>
         </Link>
       </section>

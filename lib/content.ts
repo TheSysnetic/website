@@ -216,13 +216,15 @@ export type Project = {
   slug: string;
   name: string;
   client: string;
+  /** short label for the card chip */
+  category: string;
   industry: string;
   services: string[];
   website: string;
   tagline: string;
   accent: string;
-  /** clean site screenshots (home + two inner pages), see public/images/work/screens */
-  screens: string[];
+  /** client logo, shown on a white plate (public/images/work/logos) */
+  logo: string;
   overview: string;
   challenges: string[];
   solutions: string[];
@@ -230,19 +232,42 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "khushghar",
+    name: "KhushGhar",
+    client: "KhushGhar",
+    category: "E-commerce",
+    industry: "Home & Kitchen Retail",
+    services: ["UI & UX Design", "Web Development", "Launch"],
+    website: "https://khushghar.com",
+    tagline: "A bilingual online store bringing smart, useful home products to households across Pakistan.",
+    accent: "#f2c230",
+    logo: "/images/work/logos/khushghar.webp",
+    overview:
+      "KhushGhar brings clever kitchen tools, small appliances, storage, cleaning helpers and home decor to homes across Pakistan. Every product is picked for being useful every day, checked against real buyer ratings, and delivered nationwide with cash on delivery.",
+    challenges: [
+      "Shoppers across Pakistan expect to pay on delivery and to see delivery costs upfront.",
+      "A growing catalogue across six departments had to stay effortless to browse on a phone.",
+      "The store needed to speak to customers in both English and Urdu.",
+      "A new brand had to feel trustworthy from the very first visit.",
+    ],
+    solutions: [
+      "A cash-on-delivery checkout with delivery pricing and the free-delivery threshold shown clearly.",
+      "Department navigation plus curated collections — bestsellers, kitchen favourites, under Rs 1,000.",
+      "A bilingual storefront with a one-tap English / Urdu switch.",
+      "Clear replacement, returns and shipping policies surfaced throughout the store.",
+    ],
+  },
+  {
     slug: "reparametrize-ateliers",
     name: "Reparametrize Ateliers",
     client: "Reparametrize Ateliers",
+    category: "Architecture",
     industry: "Architecture & Design",
     services: ["UI & UX Design", "Web Development"],
     website: "https://www.rpateliers.com",
     tagline: "A quiet, editorial home for a multidisciplinary architecture studio.",
     accent: "#9fb4c7",
-    screens: [
-      "/images/work/screens/reparametrize-ateliers-1.webp",
-      "/images/work/screens/reparametrize-ateliers-2.webp",
-      "/images/work/screens/reparametrize-ateliers-3.webp",
-    ],
+    logo: "/images/work/logos/reparametrize-ateliers.svg",
     overview:
       "Reparametrize Ateliers transforms spaces through five functional areas captured in the acronym LACED: Living, Ateliers, Community, Estates and Decor. Their work spans innovative living environments, captivating ateliers, community-focused design, timeless estates and curated decor — all driven by sustainable, inventive design that merges creativity with practicality.",
     challenges: [
@@ -259,48 +284,16 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "burak-technologies",
-    name: "Burak Technologies",
-    client: "Burak Technologies",
-    industry: "Digital Marketing & IT",
-    services: ["UI & UX Design", "Web Development", "Launch"],
-    website: "https://www.buraktechnologies.com",
-    tagline: "A bold, dark-mode presence for a fast-moving digital agency.",
-    accent: "#ff3b4e",
-    screens: [
-      "/images/work/screens/burak-technologies-1.webp",
-      "/images/work/screens/burak-technologies-2.webp",
-      "/images/work/screens/burak-technologies-3.webp",
-    ],
-    overview:
-      "Burak Technologies is a dynamic provider of digital marketing and technology solutions, born from a passion for innovation and client success. With a mission to empower businesses through cutting-edge strategies, they aim to be the go-to partner for companies navigating the digital age — backed by a collaborative culture that fosters creativity and teamwork.",
-    challenges: [
-      "A broad offering — marketing, development and IT — needed a clear, scannable structure.",
-      "Standing out in a crowded agency market with a distinct visual voice.",
-      "Visitors needed a short, obvious path from interest to enquiry.",
-      "The experience had to be equally strong on desktop, tablet and mobile.",
-    ],
-    solutions: [
-      "A confident dark visual identity with expressive typography and red accents.",
-      "Dedicated service pages with a clear hierarchy from overview to detail.",
-      "Conversion-focused layouts with quote requests placed at natural decision points.",
-      "A fully responsive build optimised for speed and search visibility.",
-    ],
-  },
-  {
     slug: "product-house",
     name: "Product House",
     client: "Product House",
+    category: "Product Studio",
     industry: "Product Development",
     services: ["UI & UX Design", "Web Development", "Launch"],
     website: "https://www.producthouse.us",
     tagline: "A founder-friendly platform where ideas become products.",
     accent: "#2fe0a4",
-    screens: [
-      "/images/work/screens/product-house-1.webp",
-      "/images/work/screens/product-house-2.webp",
-      "/images/work/screens/product-house-3.webp",
-    ],
+    logo: "/images/work/logos/product-house.png",
     overview:
       "Product House is where innovation and execution come together to turn ideas into industry-leading solutions. Specialising in intuitive digital design, robust hardware development and strategic guidance, they help startups scale and thrive — turning visionary concepts into impactful realities, one product at a time.",
     challenges: [
@@ -314,35 +307,6 @@ export const projects: Project[] = [
       "A vivid green-on-dark identity with friendly illustration and strong contrast.",
       "Service blocks that break each offering into digestible, scannable steps.",
       "Prominent calls to action and a streamlined enquiry flow.",
-    ],
-  },
-  {
-    slug: "byte-forge-technologies",
-    name: "Byte Forge Technologies",
-    client: "Byte Forge Technologies",
-    industry: "IT Services",
-    services: ["UI & UX Design", "Web Development", "Launch"],
-    website: "https://www.byteforgetechnologies.com",
-    tagline: "A trustworthy, people-first site for a growing IT services company.",
-    accent: "#3aa0ff",
-    screens: [
-      "/images/work/screens/byte-forge-technologies-1.webp",
-      "/images/work/screens/byte-forge-technologies-2.webp",
-      "/images/work/screens/byte-forge-technologies-3.webp",
-    ],
-    overview:
-      "Byte Forge is a forward-thinking IT services company founded in 2024 with a mission to empower businesses through innovative digital solutions. Their expertise spans analytics, social media management and content creation, and their client-first approach ensures tailored solutions that drive measurable results.",
-    challenges: [
-      "A young company needed to project credibility and experience from day one.",
-      "A wide range of IT and marketing services had to be easy to compare.",
-      "The site needed a warm, human feel in a typically technical category.",
-      "Content had to be easy to expand as new services launched.",
-    ],
-    solutions: [
-      "A clean, light design system that balances professionalism with approachability.",
-      "Card-based service overviews with concise, benefit-led copy.",
-      "Authentic photography and clear values to put people at the centre.",
-      "A scalable page structure ready for new offerings and case studies.",
     ],
   },
 ];
@@ -401,5 +365,5 @@ export const stats = [
   { value: "2024", label: "Founded in Nürnberg" },
   { value: "6", label: "Service disciplines" },
   { value: "30+", label: "Technologies in our stack" },
-  { value: "4", label: "Featured launches" },
+  { value: "3", label: "Featured launches" },
 ];

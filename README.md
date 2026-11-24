@@ -63,6 +63,6 @@ To use another form service instead, set `NEXT_PUBLIC_CONTACT_ENDPOINT` to its U
 
 ## Images
 
-Project visuals are real site screenshots shown in on-brand browser frames (`components/ui/BrowserFrame.tsx`, `ProjectVisual.tsx`), not flat device mockups.
+The work section shows each client's logo on a white plate (`components/ui/LogoPlate.tsx`, `ProjectCard.tsx`). Logos live in `public/images/work/logos/` and are referenced from `lib/content.ts`.
 
-The raw MacBook mockup exports live in `assets-src/work/` (git-ignored, named `Name_1..3.png`). Run `npm run optimize-images` to cut the screen area out of them and write WebP files to `public/images/work/screens/`. It also regenerates the favicons.
+`npm run optimize-images` regenerates the favicons from `assets-src/favicon.png`.

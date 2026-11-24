@@ -59,7 +59,7 @@
   status = 301
 [[redirects]]
   from = "/burakTech.html"
-  to = "/work/burak-technologies/"
+  to = "/work/"
   status = 301
 [[redirects]]
   from = "/productHouse.html"
@@ -67,7 +67,7 @@
   status = 301
 [[redirects]]
   from = "/byteForge.html"
-  to = "/work/byte-forge-technologies/"
+  to = "/work/"
   status = 301
 [[redirects]]
   from = "/privacy-policy.html"
@@ -81,6 +81,18 @@
   from = "/page-404.html"
   to = "/"
   status = 301
+
+# case studies removed from the site (client sites offline)
+[[redirects]]
+  from = "/work/burak-technologies/*"
+  to = "/work/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/work/byte-forge-technologies/*"
+  to = "/work/"
+  status = 301
+  force = true
 
 # --- headers ---
 [[headers]]
