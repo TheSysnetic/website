@@ -28,8 +28,8 @@ Don't run `next build` while `next dev` is running: they share `.next/` and the 
 | `components/sections/` | Home page sections (hero, services scroller, work stack, process, tech stack…) |
 | `components/three/` | WebGL scene: morphing particle system + extruded 3D logo |
 | `components/layout/` | Header, footer, smooth scroll, cursor, preloader, page animations |
-| `public/contact.php` | Contact form handler (PHP `mail()`) |
-| `public/.htaccess` | 301s from the old `*.html` URLs, HTTPS, caching & security headers |
+| `netlify.toml` | Build settings, 301s from the old `*.html` URLs, caching & security headers |
+| `public/__forms.html` | Netlify Forms registration for the contact form |
 
 ## How the 3D works
 
@@ -49,15 +49,17 @@ Accessibility: `prefers-reduced-motion` disables smooth scroll, split-text and t
 - Static HTML for every page; per-page title, description, canonical and Open Graph (`lib/seo.ts`).
 - JSON-LD: Organization, BreadcrumbList, Service + FAQPage (service pages), CreativeWork (case studies), ContactPage.
 - `sitemap.xml` and `robots.txt` generated at build time.
-- 301 redirects from every legacy URL in `public/.htaccess`.
+- 301 redirects from every legacy URL in `netlify.toml`.
 
-## Deploying
+## Deploying (Netlify)
 
-1. `npm run build`
-2. Upload the **contents** of `out/` (including the hidden `.htaccess`) to the web root of the Apache/PHP host.
-3. In `public/contact.php`, make sure `FROM_ADDRESS` is a mailbox on your domain so mail passes SPF/DKIM.
+`netlify.toml` holds the whole setup: build command, publish dir `out/`, 301s from the legacy `*.html` URLs, and security/cache headers. Pushing to `main` deploys.
 
-On a host without PHP (Vercel, Netlify, Cloudflare Pages), set `NEXT_PUBLIC_CONTACT_ENDPOINT` to a form service URL (for example Formspree). Then redo the `.htaccess` redirects in that platform's config format.
+**Contact form:** uses Netlify Forms. The form is registered by the static `public/__forms.html` and the React form posts to it. In the Netlify dashboard:
+1. Enable form detection (Forms → Enable form detection), then redeploy.
+2. Add an email notification (Forms → Form notifications → Email) so enquiries reach info@thesysnetic.com.
+
+To use another form service instead, set `NEXT_PUBLIC_CONTACT_ENDPOINT` to its URL.
 
 ## Images
 

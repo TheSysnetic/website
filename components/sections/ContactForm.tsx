@@ -3,7 +3,9 @@
 import { useState, type FormEvent } from "react";
 import { services, site } from "@/lib/content";
 
-const endpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/contact.php";
+// Default: Netlify Forms (registered via public/__forms.html). Set NEXT_PUBLIC_CONTACT_ENDPOINT
+// to post to a different form service instead (it should accept multipart and return JSON).
+const customEndpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT;
 const budgets = ["< €5k", "€5k – €15k", "€15k – €50k", "€50k+", "Not sure yet"];
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -23,9 +25,20 @@ export default function ContactForm() {
     setStatus("sending");
     setError("");
     try {
-      const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
-      const json = await res.json().catch(() => ({}));
-      if (!res.ok || json.ok === false) throw new Error(json.error || "Something went wrong.");
+      if (customEndpoint) {
+        const res = await fetch(customEndpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || json.ok === false) throw new Error(json.error || "Something went wrong.");
+      } else {
+        data.set("form-name", "contact");
+        const body = new URLSearchParams(Array.from(data.entries()).map(([k, v]) => [k, String(v)]));
+        const res = await fetch("/__forms.html", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: body.toString(),
+        });
+        if (!res.ok) throw new Error("We could not send your message right now.");
+      }
       setStatus("sent");
       form.reset();
       setPicked([]);
@@ -54,7 +67,7 @@ export default function ContactForm() {
     "pointer-events-none absolute left-0 top-6 text-lg text-muted transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-accent peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs";
 
   return (
-    <form onSubmit={onSubmit} className="glass rounded-[2rem] bg-ink/60 p-6 md:p-10" noValidate={false}>
+    <form name="contact" onSubmit={onSubmit} className="glass rounded-[2rem] bg-ink/60 p-6 md:p-10" noValidate={false}>
       <fieldset className="mb-10">
         <legend className="mb-4 text-sm text-muted">I&apos;m interested in…</legend>
         <div className="flex flex-wrap gap-2">
