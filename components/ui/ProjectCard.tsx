@@ -34,7 +34,7 @@ export default function ProjectCard({ project, index, priority }: { project: Pro
 
       <div className="mt-auto pt-8">
         <div className="flex items-end justify-between gap-4">
-          <h3 className="display text-3xl md:text-[2.1rem]">{project.name}</h3>
+          <h3 className="display min-w-0 flex-1 break-words text-3xl md:text-[2.1rem] xl:text-[1.8rem]">{project.name}</h3>
           <span
             className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full border border-white/15 transition-all duration-500 group-hover:rotate-45 group-hover:border-transparent group-hover:text-ink"
             style={{ "--accent": accent } as CSSProperties}
