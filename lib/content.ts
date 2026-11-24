@@ -225,6 +225,10 @@ export type Project = {
   accent: string;
   /** client logo, shown on a white plate (public/images/work/logos) */
   logo: string;
+  /** intrinsic logo size in px (for SVGs, the viewBox) */
+  logoSize: [number, number];
+  /** largest width (CSS px) the logo is shown at, so raster logos never get upscaled into blur */
+  logoMaxWidth: number;
   overview: string;
   challenges: string[];
   solutions: string[];
@@ -242,6 +246,8 @@ export const projects: Project[] = [
     tagline: "A bilingual online store bringing smart, useful home products to households across Pakistan.",
     accent: "#f2c230",
     logo: "/images/work/logos/khushghar.webp",
+    logoSize: [1440, 296],
+    logoMaxWidth: 460,
     overview:
       "KhushGhar brings clever kitchen tools, small appliances, storage, cleaning helpers and home decor to homes across Pakistan. Every product is picked for being useful every day, checked against real buyer ratings, and delivered nationwide with cash on delivery.",
     challenges: [
@@ -268,6 +274,8 @@ export const projects: Project[] = [
     tagline: "A quiet, editorial home for a multidisciplinary architecture studio.",
     accent: "#9fb4c7",
     logo: "/images/work/logos/reparametrize-ateliers.svg",
+    logoSize: [842, 247],
+    logoMaxWidth: 360,
     overview:
       "Reparametrize Ateliers transforms spaces through five functional areas captured in the acronym LACED: Living, Ateliers, Community, Estates and Decor. Their work spans innovative living environments, captivating ateliers, community-focused design, timeless estates and curated decor — all driven by sustainable, inventive design that merges creativity with practicality.",
     challenges: [
@@ -294,6 +302,8 @@ export const projects: Project[] = [
     tagline: "A founder-friendly platform where ideas become products.",
     accent: "#2fe0a4",
     logo: "/images/work/logos/product-house.png",
+    logoSize: [702, 136],
+    logoMaxWidth: 350,
     overview:
       "Product House is where innovation and execution come together to turn ideas into industry-leading solutions. Specialising in intuitive digital design, robust hardware development and strategic guidance, they help startups scale and thrive — turning visionary concepts into impactful realities, one product at a time.",
     challenges: [
